@@ -11,9 +11,11 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
 
              {% if user.is_authenticated %}
+             
                 <li class="nav-item"><a class="nav-link" href="{% url 'logoutpage' %}">Logout</a></li>
             {% else %}
             <li class="nav-item"><a class="nav-link" href="{% url 'loginpage' %}">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
             {% endif %}
 
 

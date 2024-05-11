@@ -1,41 +1,56 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from .forms import SignUpForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Product, Category
+from .models import Product, Category, Profile
+from .forms import UserInfoForm
 
 
 
 def signup(request):
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-        form.save()
-        user = form.cleaned_data.get('username')
-        messages.success(request, 'Account successfully created for '+ user)
-        return redirect('loginpage')
+    form = SignUpForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Account successfully created for '+ user.username)
+                return redirect('index')
+        else:
+            messages.success(request, 'Whoops, there was a problem signing up, try again')
+            return redirect('signup')
+
+
     else:
-        form = UserCreationForm()
-        context = {'form':form}
-    return render(request, 'signup.html', context)
+        return render(request, 'signup.html', {'form':form})
 
 def loginpage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        password = request.POST.get('password1')
+        password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, "You have bee logged in...")
             return redirect('index')
         else:
             messages.error(request, 'Username or password incorrect')
+            return redirect('loginpage')
     form = UserCreationForm(request.POST)
-    context = {'form':form}
-    return render(request, 'loginpage.html', context)
+        
+    #context = {'form':form}
+    return render(request, 'loginpage.html')
 
 def logoutpage(request):
     logout(request)
+    messages.success(request, "You have bee logged out...")
     return redirect('loginpage')
     
     
@@ -65,6 +80,20 @@ def category(request,foo):
         messages.success(request, 'That category does not exist')
         return redirect('index')
 
+# def update_info(request):
+#     if request.user.is_authenticated:
+#         current_user = Profile.objects.get(user__id=request.user.id)
+#         form = UserInfoForm(request.POST or None, instance=current_user)
+
+#         if form.is_valid():
+#             form.save()
+
+#             messages.success(request, "Your Info has been updated" )
+#             return redirect('index')
+#         return render(request, 'update_info.html', {'form':form})
+#     else:
+#         messages.success(request, "You must be logged in to access that page" )
+#         return redirect('index')
 # def category_summary(request):
 #     categories = Category.objects.all()
 #     return render(request, 'category_summary.html', {'categories':categories})

@@ -4,7 +4,47 @@
     {% load static %}  
 
     {% block content %}
-    <!DOCTYPE html>
+
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Login</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Login Into Your Account...</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container"> 
+        <div class="row">
+            <center>
+                <div class="col-md-6 offset-md-1">
+                   
+                    <br/><br/>
+                    <form method="POST" action="{% url 'loginpage' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                          <input type="text" class="form-control" name="username" placeholder="Enter Your Username">
+                        </div>
+                        <div class="mb-3">
+                          <input type="password" class="form-control" name="password" placeholder="Enter Your password">
+                        </div>
+                        <br/><br/>
+                        <button type="submit" class="btn btn-secondary">Login</button>
+                      </form>
+                    </div>
+            </center> 
+        </div>
+    </div>
+            
+
+            </div>
+    <br/><br/><br/><br/>
+                         
+                         <br/><br/>
+                         <br/><br/>
+                         
+                         
+    <!-- <!DOCTYPE html>
     <html>
     <head>
         <meta charset="utf-8">
@@ -169,18 +209,14 @@ p{
                      <label for="name" style="color: white;">password</label>
                      {{form.password1}}
                     
-                       <a class="forgot text-muted" href="#">Forgot password?</a> 
+                     
                        <input type="submit" name="Create User">
 
                        {% for message in messages%}
                             <p id="messages">{{message}}</p>
                        {% endfor %}
                        <a href="{% url 'signup' %}" style="color: aliceblue;">SignUp Here</a>
-                        <div class="col-md-12"> <ul class="social-network social-circle">
-                             <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                              <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li> 
-                              <li><a href="#" class="icoGoogle" title="Google +"><i class="fab fa-google-plus"></i></a></li> </ul> 
-                            </div>
+                       
                          </form>
                          </div>
                          </div>
@@ -198,7 +234,7 @@ p{
                          <br/><br/>
 
         </div>
-            <!-- <script>
+            <script>
                 var form_field = document.getElementsByTagName('input')
                 form_field[1].placeholder='Username..';
                 form_field[2].placeholder='Email..';
@@ -210,8 +246,8 @@ p{
                 }
             </script> -->
             
-    </body>
-    </html>
+    <!-- </body>
+    </html> --> 
     
 </form>
 {% endblock %}
