@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Product, Category, Profile
 from .forms import UserInfoForm
+from django.db.models import Q
 
 
 
@@ -139,6 +140,23 @@ def update_info(request):
     else:
         messages.success(request, 'Your must be logged in to access that page!!!')
         return redirect('index')
+
+    
+
+def search(request):
+    if request.method == "POST":
+        searched = request.POST.get('searched', '')
+        if searched:
+            # Query products db model
+            searched_results = Product.objects.filter(Q(name__icontains=searched) | Q(description__icontains=searched))
+            if not searched_results:
+                messages.success(request, "Product does not exist...please try again")
+            return render(request, "search.html", {'searched': searched_results})
+        else:
+            messages.error(request, "Please enter a search query")
+            return render(request, "search.html")
+
+    return render(request, "search.html")
 
    
 
