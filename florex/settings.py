@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'cart',
+    'florex',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'florex.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'C:\Users\FAHD ABDULLAI\Desktop\Nak_Florex\florex\florex\template'],
+        'DIRS': [r'C:\Users\FAHD ABDULLAI\Desktop\Nak_Florex\florex\template'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
