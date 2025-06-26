@@ -9,7 +9,7 @@
         <div class="card mb-3">
             <div class="row g-0">
               <div class="col-md-4">
-                <img src="{{product.image.url}}" class="img-fluid rounded-start" alt="...">
+                <img src="{{product.image.url}}" class="img-fluid rounded-start hover-effect" alt="...">
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -86,8 +86,22 @@
 
 
       })
+      
 
 
     </script>
+    <style>
+      /* Image hover effect */
+      .hover-effect {
+        transition: transform 0.3s ease, filter 0.3s ease;
+      }
+      
+      .hover-effect:hover {
+        transform: scale(1.05);
+        filter: brightness(1.1);
+        cursor: pointer;
+      }
+      </style>
+      
 
     {% endblock %}

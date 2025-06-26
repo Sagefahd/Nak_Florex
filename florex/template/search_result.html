@@ -1,0 +1,31 @@
+{% extends 'base.html' %}  <!-- Only if you use a base layout -->
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Search Results</h2>
+
+    {% if searched %}
+        {% if searched|length > 0 %}
+            <p class="text-success">Found {{ searched|length }} result{{ searched|length|pluralize }}:</p>
+            <ul class="list-group mt-3">
+                {% for product in searched %}
+                <li class="list-group-item d-flex align-items-start">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="me-3" style="width: 100px; height: auto;">
+                    <div>
+                        <h5>{{ product.name }}</h5>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View Product</a></div>
+                        </div>
+                    </div>
+                </li>
+                
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-warning">No results found.</div>
+        {% endif %}
+    {% else %}
+        <p class="text-muted">Enter a keyword and press search.</p>
+    {% endif %}
+</div>
+{% endblock %}
