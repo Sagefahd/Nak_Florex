@@ -4,34 +4,62 @@
 {% block content %}
 
 
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
+
+<header class="hero-header py-5">
+    <div class="hero-overlay"></div>
+    <div class="container px-4 px-lg-5 my-5 position-relative">
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">Sign Up</h1>
             <p class="lead fw-normal text-white-50 mb-0">Register a user account...</p>
         </div>
     </div>
 </header>
+<style>
+    .hero-header {
+    position: relative;
+    background: url('/static/image/about.jpg') center/cover no-repeat;
+    background-color: #343a40; /* fallback for dark bg if image doesn't load */
+    color: white;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+}
 
-<div class="container"> 
-    <div class="row">
-        <center>
-            <div class="col-md-6 offset-md-1">
-               
-                <br/><br/>
-                <form method="POST" action="{% url 'signup' %}">
-                {% csrf_token %}
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5); /* dark overlay for better text contrast */
+    z-index: 0;
+}
 
-                    {{ form.as_p }}
-                    <br/><br/>
-                    <button type="submit" class="btn btn-secondary">SignUp</button>
+.hero-header .container {
+    position: relative;
+    z-index: 1;
+}
 
-                    
-                  </form>
+</style>  
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4">Create Your Account</h3>
+                    <form method="POST" action="{% url 'signup' %}">
+                        {% csrf_token %}
+                        
+                        {{ form.as_p }}
+                        
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-dark">Sign Up</button>
+                        </div>
+                    </form>
                 </div>
-        </center> 
+            </div>
+        </div>
     </div>
 </div>
+
         
 
         </div>

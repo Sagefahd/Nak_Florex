@@ -5,36 +5,67 @@
 
     {% block content %}
 
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
+
+    <header class="hero-header py-5">
+        <div class="hero-overlay"></div>
+        <div class="container px-4 px-lg-5 my-5 position-relative">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Login</h1>
                 <p class="lead fw-normal text-white-50 mb-0">Login Into Your Account...</p>
             </div>
         </div>
     </header>
+    <style>
+        .hero-header {
+        position: relative;
+        background: url('/static/image/about.jpg') center/cover no-repeat;
+        background-color: #343a40; /* fallback for dark bg if image doesn't load */
+        color: white;
+        min-height: 350px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5); /* dark overlay for better text contrast */
+        z-index: 0;
+    }
+    
+    .hero-header .container {
+        position: relative;
+        z-index: 1;
+    }
+    
+    </style>  
 
-    <div class="container"> 
-        <div class="row">
-            <center>
-                <div class="col-md-6 offset-md-1">
-                   
-                    <br/><br/>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h3 class="text-center mb-4">Login to Your Account</h3>
                     <form method="POST" action="{% url 'loginpage' %}">
                         {% csrf_token %}
                         <div class="mb-3">
-                          <input type="text" class="form-control" name="username" placeholder="Enter Your Username">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username" required>
                         </div>
                         <div class="mb-3">
-                          <input type="password" class="form-control" name="password" placeholder="Enter Your password">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
                         </div>
-                        <br/><br/>
-                        <button type="submit" class="btn btn-secondary">Login</button>
-                      </form>
-                    </div>
-            </center> 
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-dark">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+
             
 
             </div>

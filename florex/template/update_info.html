@@ -4,14 +4,40 @@
 {% block content %}
 
 
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
+
+<header class="hero-header py-5">
+    <div class="hero-overlay"></div>
+    <div class="container px-4 px-lg-5 my-5 position-relative">
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">Update Info</h1>
             <p class="lead fw-normal text-white-50 mb-0">Update User Info...</p>
         </div>
     </div>
 </header>
+<style>
+    .hero-header {
+    position: relative;
+    background: url('/static/image/about.jpg') center/cover no-repeat;
+    background-color: #343a40; /* fallback for dark bg if image doesn't load */
+    color: white;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5); /* dark overlay for better text contrast */
+    z-index: 0;
+}
+
+.hero-header .container {
+    position: relative;
+    z-index: 1;
+}
+
+</style>    
 
 <div class="container"> 
     <div class="row">
